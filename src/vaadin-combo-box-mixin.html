@@ -574,14 +574,17 @@ This program is available under Apache License Version 2.0, available at https:/
         this.close();
       }
 
-      if (this.$.overlay._items && this._focusedIndex > -1) {
-        const focusedItem = this.$.overlay._items[this._focusedIndex];
-        if (this.selectedItem !== focusedItem) {
-          this.selectedItem = focusedItem;
-        }
+      // Fix for https://github.com/vaadin/vaadin-combo-box/issues/819
+      //if (this.$.overlay._items && this._focusedIndex > -1) {
+      //  const focusedItem = this.$.overlay._items[this._focusedIndex];
+      //  if (this.selectedItem !== focusedItem) {
+      //    this.selectedItem = focusedItem;
+      //  }
         // make sure input field is updated in case value doesn't change (i.e. FOO -> foo)
-        this._inputElementValue = this._getItemLabel(this.selectedItem);
-      } else if (this._inputElementValue === '' || this._inputElementValue === undefined) {
+      //  this._inputElementValue = this._getItemLabel(this.selectedItem);
+      //} else
+
+      if (this._inputElementValue === '' || this._inputElementValue === undefined) {
         this.selectedItem = null;
 
         if (this.allowCustomValue) {
