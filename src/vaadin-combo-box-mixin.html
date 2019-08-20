@@ -482,6 +482,7 @@ This program is available under Apache License Version 2.0, available at https:/
       // should close on enter when custom values are allowed, input field is cleared, or when an existing
       // item is focused with keyboard.
       if (this.opened && (this.allowCustomValue || this._inputElementValue === '' || this._focusedIndex > -1)) {
+        this.__itemClickedOrEnterWhilstFocused = true;
         this.close();
 
         // Do not submit the surrounding form.
@@ -575,16 +576,15 @@ This program is available under Apache License Version 2.0, available at https:/
       }
 
       // Fix for https://github.com/vaadin/vaadin-combo-box/issues/819
-      //if (this.$.overlay._items && this._focusedIndex > -1) {
-      //  const focusedItem = this.$.overlay._items[this._focusedIndex];
-      //  if (this.selectedItem !== focusedItem) {
-      //    this.selectedItem = focusedItem;
-      //  }
+      if (this.$.overlay._items && this._focusedIndex > -1 && this.__itemClickedOrEnterWhilstFocused) {
+       delete this.__itemClickedOrEnterWhilstFocused;
+       const focusedItem = this.$.overlay._items[this._focusedIndex];
+       if (this.selectedItem !== focusedItem) {
+         this.selectedItem = focusedItem;
+       }
         // make sure input field is updated in case value doesn't change (i.e. FOO -> foo)
-      //  this._inputElementValue = this._getItemLabel(this.selectedItem);
-      //} else
-
-      if (this._inputElementValue === '' || this._inputElementValue === undefined) {
+       this._inputElementValue = this._getItemLabel(this.selectedItem);
+      } else if (this._inputElementValue === '' || this._inputElementValue === undefined) {
         this.selectedItem = null;
 
         if (this.allowCustomValue) {
@@ -898,6 +898,7 @@ This program is available under Apache License Version 2.0, available at https:/
 
       if (this.opened) {
         this._focusedIndex = this.filteredItems.indexOf(e.detail.item);
+        this.__itemClickedOrEnterWhilstFocused = true;
         this.close();
       } else if (this.selectedItem !== e.detail.item) {
         this.selectedItem = e.detail.item;
