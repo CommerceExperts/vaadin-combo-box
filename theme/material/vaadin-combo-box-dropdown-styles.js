@@ -1,7 +1,6 @@
-<link rel="import" href="../../../vaadin-material-styles/color.html">
-<link rel="import" href="../../../vaadin-material-styles/mixins/menu-overlay.html">
+const $_documentContainer = document.createElement('template');
 
-<dom-module id="material-combo-box-overlay" theme-for="vaadin-combo-box-overlay">
+$_documentContainer.innerHTML = `<dom-module id="material-combo-box-overlay" theme-for="vaadin-combo-box-overlay">
   <template>
     <style include="material-menu-overlay">
       :host {
@@ -92,4 +91,6 @@
       }
     </style>
   </template>
-</dom-module>
+</dom-module>`;
+
+document.head.appendChild($_documentContainer.content);

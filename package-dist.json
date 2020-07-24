@@ -1,0 +1,8 @@
+{
+  "name": "vaadin-combo-box",
+  "version": "5.0.8",
+  "description": "CXP enhanced version of vaadin combo box",
+  "publishConfig" : {
+    "registry" : "https://nexus.commerce-experts.com/content/repositories/npm-hosted/"
+  }
+}

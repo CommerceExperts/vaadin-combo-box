@@ -1,9 +1,6 @@
-<link rel="import" href="../../../vaadin-material-styles/color.html">
-<link rel="import" href="../../../vaadin-material-styles/font-icons.html">
-<link rel="import" href="../../../vaadin-material-styles/typography.html">
-<link rel="import" href="../../../vaadin-item/theme/material/vaadin-item.html">
+const $_documentContainer = document.createElement('template');
 
-<dom-module id="material-combo-box-item" theme-for="vaadin-combo-box-item">
+$_documentContainer.innerHTML = `<dom-module id="material-combo-box-item" theme-for="vaadin-combo-box-item">
   <template>
     <style include="material-item">
       :host {
@@ -36,4 +33,6 @@
       }
     </style>
   </template>
-</dom-module>
+</dom-module>`;
+
+document.head.appendChild($_documentContainer.content);

@@ -8,31 +8,25 @@
   <script src="../../web-component-tester/browser.js"></script>
   <script src='../../webcomponentsjs/webcomponents-lite.js'></script>
   <link rel="import" href="../../test-fixture/test-fixture.html">
-  <link rel="import" href="common-imports.html">
+  <script type="module" src="./common-imports.js"></script>
   <script src="common.js"></script>
   <link rel="import" href="../../iron-input/iron-input.html">
-</head>
-
-<body>
-
-  <dom-module id="value-null">
+</<script src="./common.js"></script>id="value-null">
     <script>
       // IE11 needs to wait for Polymer being loaded.
       window.addEventListener('WebComponentsReady', () => {
         Polymer({
-          is: 'value-null',
-          properties: {
-            value: {
-              notify: true
-            }
-          },
-        });
-      });
-    </script>
-  </dom-module>
-
-  <test-fixture id="fixturenull">
-    <template>
+    <script type="module">
+import './common-imports.js';
+Polymer({
+  is: 'value-null',
+  properties: {
+    value: {
+      notify: true
+    }
+  },
+});
+</script>>
       <dom-bind>
         <template>
           <value-null id="valuenull" value="{{name}}"></value-null>
@@ -51,36 +45,39 @@
     // Chrome demonstrates a loop when setting value to null/undefined and value is
     // bound in other components firing change events like in iron-input#bindValue.
     // In other browsers these tests do not work, and the browser could freeze.
-    describeIf(window.chrome, 'Chrome loops', () => {
-      let valueNull, comboBox;
+  <script type="module">
+import './common-imports.js';
+describe('data binding', () => {
 
-      beforeEach(() => {
-        const root = fixture('fixturenull');
-        valueNull = root.$.valuenull;
-        comboBox = root.$.combobox;
-      });
+  // Chrome demonstrates a loop when setting value to null/undefined and value is
+  // bound in other components firing change events like in iron-input#bindValue.
+  // In other browsers these tests do not work, and the browser could freeze.
+  describeIf(window.chrome, 'Chrome loops', () => {
+    let valueNull, comboBox;
 
-      // Setting value to null/undefined makes the component enter in a loop,
-      // for instance iron-localstorage sets it to null when the key does not exist.
-      [null, undefined].forEach(value => {
-        it('should not enter in a loop when setting value to ' + value, done => {
+    beforeEach(() => {
+      const root = fixture('fixturenull');
+      valueNull = root.$.valuenull;
+      comboBox = root.$.combobox;
+    });
 
-          // Not using sinon.spy, so we can break the loop before overflowing the stack.
-          let i = 0;
-          comboBox.addEventListener('value-changed', expect(i++).to.be.below(30));
+    // Setting value to null/undefined makes the component enter in a loop,
+    // for instance iron-localstorage sets it to null when the key does not exist.
+    [null, undefined].forEach(value => {
+      it('should not enter in a loop when setting value to ' + value, done => {
 
-          setTimeout(() => {
-            expect(i).to.be.at.most(2);
-            done();
-          }, 1);
+        // Not using sinon.spy, so we can break the loop before overflowing the stack.
+        let i = 0;
+        comboBox.addEventListener('value-changed', expect(i++).to.be.below(30));
 
-          valueNull.value = value;
-        });
+        setTimeout(() => {
+          expect(i).to.be.at.most(2);
+          done();
+        }, 1);
+
+        valueNull.value = value;
       });
     });
   });
-  </script>
-
-</body>
-
-</html>
+});
+</script>

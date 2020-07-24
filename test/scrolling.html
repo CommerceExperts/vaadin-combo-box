@@ -8,12 +8,11 @@
   <script src="../../web-component-tester/browser.js"></script>
   <script src='../../webcomponentsjs/webcomponents-lite.js'></script>
   <link rel="import" href="../../test-fixture/test-fixture.html">
-  <link rel="import" href="common-imports.html">
+  <script type="module" src="./common-imports.js"></script>
   <script src="common.js"></script>
 </head>
 
-<body>
-  <test-fixture id="combobox">
+<script src="./common.js"></script>box">
     <template>
       <vaadin-combo-box></vaadin-combo-box>
     </template>
@@ -24,108 +23,110 @@
 
       let combobox;
 
-      beforeEach(() => combobox = fixture('combobox'));
+<script type="module">
+import './common-imports.js';
+describe('scrolling', () => {
 
-      describeIf(ios, 'iOS', () => {
-        it('should have momentum scrolling enabled', () => {
-          combobox.open();
+  let combobox;
 
-          const scroller = combobox.$.overlay._scroller;
-          expect(getComputedStyle(scroller).WebkitOverflowScrolling).to.equal('touch');
-        });
-      });
+  beforeEach(() => combobox = fixture('combobox'));
 
-      describeIf(/Trident/.test(navigator.userAgent), 'IE11', () => {
-        it('should have unselectable="on" for the scroller', () => {
-          combobox.open();
-          combobox.close();
+  describeIf(ios, 'iOS', () => {
+    it('should have momentum scrolling enabled', () => {
+      combobox.open();
 
-          const scroller = combobox.$.overlay._scroller;
-          expect(scroller.getAttribute('unselectable')).to.equal('on');
-        });
-      });
+      const scroller = combobox.$.overlay._scroller;
+      expect(getComputedStyle(scroller).WebkitOverflowScrolling).to.equal('touch');
+    });
+  });
 
-      describe('scrolling position', () => {
-        beforeEach(() => {
-          const items = [];
+  describeIf(/Trident/.test(navigator.userAgent), 'IE11', () => {
+    it('should have unselectable="on" for the scroller', () => {
+      combobox.open();
+      combobox.close();
 
-          for (let i = 0; i < 100; i++) {
-            items.push(i.toString());
-          }
+      const scroller = combobox.$.overlay._scroller;
+      expect(scroller.getAttribute('unselectable')).to.equal('on');
+    });
+  });
 
-          combobox.items = items;
-        });
+  describe('scrolling position', () => {
+    beforeEach(() => {
+      const items = [];
 
-        it('should be zero when no items are selected', () => {
-          combobox.open();
+      for (let i = 0; i < 100; i++) {
+        items.push(i.toString());
+      }
 
-          expect(combobox.$.overlay._scroller.scrollTop).to.equal(0);
-        });
+      combobox.items = items;
+    });
 
-        it('should be zero when the first item is selected', () => {
-          combobox.value = combobox.items[0];
-          combobox.open();
+    it('should be zero when no items are selected', () => {
+      combobox.open();
 
-          expect(combobox.$.overlay._scroller.scrollTop).to.equal(0);
-        });
+      expect(combobox.$.overlay._scroller.scrollTop).to.equal(0);
+    });
 
-        function expectSelectedItemPositionToBeVisible() {
-          const selectedItem = combobox.$.overlay._selector.querySelector('[selected]');
-          expect(selectedItem).to.be.ok;
+    it('should be zero when the first item is selected', () => {
+      combobox.value = combobox.items[0];
+      combobox.open();
 
-          const selectedItemRect = selectedItem.getBoundingClientRect();
-          const overlayRect = combobox.$.overlay.$.dropdown.$.overlay.getBoundingClientRect();
-          expect(selectedItemRect.left).to.be.at.least(overlayRect.left - 1);
-          expect(selectedItemRect.top).to.be.at.least(overlayRect.top - 1);
-          expect(selectedItemRect.right).to.be.at.most(overlayRect.right + 1);
-          expect(selectedItemRect.bottom).to.be.at.most(overlayRect.bottom + 1);
-        }
+      expect(combobox.$.overlay._scroller.scrollTop).to.equal(0);
+    });
 
-        it('should make selected item visible after open', done => {
-          combobox.value = combobox.items[50];
-          combobox.open();
+    function expectSelectedItemPositionToBeVisible() {
+      const selectedItem = combobox.$.overlay._selector.querySelector('[selected]');
+      expect(selectedItem).to.be.ok;
 
-          onceScrolled(combobox.$.overlay._scroller).then(() => {
-            expectSelectedItemPositionToBeVisible();
-            done();
-          });
-        });
+      const selectedItemRect = selectedItem.getBoundingClientRect();
+      const overlayRect = combobox.$.overlay.$.dropdown.$.overlay.getBoundingClientRect();
+      expect(selectedItemRect.left).to.be.at.least(overlayRect.left - 1);
+      expect(selectedItemRect.top).to.be.at.least(overlayRect.top - 1);
+      expect(selectedItemRect.right).to.be.at.most(overlayRect.right + 1);
+      expect(selectedItemRect.bottom).to.be.at.most(overlayRect.bottom + 1);
+    }
 
-        it('should make selected item visible after reopen', done => {
-          combobox.open();
+    it('should make selected item visible after open', done => {
+      combobox.value = combobox.items[50];
+      combobox.open();
 
-          combobox.value = combobox.items[50];
-          combobox.close();
-
-          onceOpened(combobox).then(() => {
-            expectSelectedItemPositionToBeVisible();
-            done();
-          });
-
-          combobox.open();
-        });
-
-        it('should not close the items when touching scroll bar', () => {
-          combobox.open();
-          const e = new CustomEvent('focusout', {bubbles: true, composed: true});
-          e.relatedTarget = combobox.$.overlay.$.dropdown.$.overlay;
-          combobox.inputElement.dispatchEvent(e);
-
-          expect(combobox.opened).to.be.true;
-        });
-
-        it('should keep the input focused while scrolling', () => {
-          combobox.open();
-          const e = new CustomEvent('focusout', {bubbles: true, composed: true});
-          e.relatedTarget = combobox.$.overlay.$.dropdown.$.overlay;
-          combobox.inputElement.dispatchEvent(e);
-
-          expect(combobox.inputElement.hasAttribute('focused')).to.be.true;
-        });
+      onceScrolled(combobox.$.overlay._scroller).then(() => {
+        expectSelectedItemPositionToBeVisible();
+        done();
       });
     });
-  </script>
 
-</body>
+    it('should make selected item visible after reopen', done => {
+      combobox.open();
 
-</html>
+      combobox.value = combobox.items[50];
+      combobox.close();
+
+      onceOpened(combobox).then(() => {
+        expectSelectedItemPositionToBeVisible();
+        done();
+      });
+
+      combobox.open();
+    });
+
+    it('should not close the items when touching scroll bar', () => {
+      combobox.open();
+      const e = new CustomEvent('focusout', {bubbles: true, composed: true});
+      e.relatedTarget = combobox.$.overlay.$.dropdown.$.overlay;
+      combobox.inputElement.dispatchEvent(e);
+
+      expect(combobox.opened).to.be.true;
+    });
+
+    it('should keep the input focused while scrolling', () => {
+      combobox.open();
+      const e = new CustomEvent('focusout', {bubbles: true, composed: true});
+      e.relatedTarget = combobox.$.overlay.$.dropdown.$.overlay;
+      combobox.inputElement.dispatchEvent(e);
+
+      expect(combobox.inputElement.hasAttribute('focused')).to.be.true;
+    });
+  });
+});
+</script>
