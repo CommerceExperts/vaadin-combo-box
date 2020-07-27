@@ -1,5 +1,8 @@
-<dom-module id="combo-box-filtering-demos">
-  <template>
+import { html } from '@polymer/polymer/lib/utils/html-tag.js';
+import { PolymerElement } from '@polymer/polymer/polymer-element.js';
+class ComboBoxFilteringDemos extends DemoReadyEventEmitter(ComboBoxDemo(PolymerElement)) {
+  static get template() {
+    return html`
     <style include="vaadin-component-demo-shared-styles">
       :host {
         display: block;
@@ -11,7 +14,7 @@
       case-insensitive content filtering.
     </p>
     <vaadin-demo-snippet id="customizing-filtering" when-defined="vaadin-combo-box">
-      <template preserve-content>
+      <template preserve-content="">
         <vaadin-combo-box></vaadin-combo-box>
         <script>
           window.addDemoReadyListener('#customizing-filtering', function(document) {
@@ -26,17 +29,14 @@
               });
             });
           });
-        </script>
+        &lt;/script>
       </template>
     </vaadin-demo-snippet>
+`;
+  }
 
-  </template>
-  <script>
-    class ComboBoxFilteringDemos extends DemoReadyEventEmitter(ComboBoxDemo(Polymer.Element)) {
-      static get is() {
-        return 'combo-box-filtering-demos';
-      }
-    }
-    customElements.define(ComboBoxFilteringDemos.is, ComboBoxFilteringDemos);
-  </script>
-</dom-module>
+  static get is() {
+    return 'combo-box-filtering-demos';
+  }
+}
+customElements.define(ComboBoxFilteringDemos.is, ComboBoxFilteringDemos);

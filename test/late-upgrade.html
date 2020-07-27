@@ -6,14 +6,12 @@
 
   <script src="../../web-component-tester/browser.js"></script>
   <script src='../../webcomponentsjs/webcomponents-lite.js'></script>
-  <link rel="import" href="../../test-fixture/test-fixture.html">
-  <link rel="import" href="../../polymer/polymer.html">
+  <script src="../../../wct-browser-legacy/browser.js"></script>t-fixture.js"></script>
+  <script src="../../../@webcomponents/webcomponentsjs/webcomponents-bundle.js"></script>.js"></script>
   <script src="common.js"></script>
 </head>
 
-<body>
-
-  <test-fixture id="combobox">
+<script src="./common.js"></script>bobox">
     <template>
       <vaadin-combo-box></vaadin-combo-box>
     </template>
@@ -24,26 +22,30 @@
       let combobox;
 
       if (!(window['Polymer'] && window['Polymer'].importHref)) {
-        return; // TODO: With Polymer 3 we don’t have the HTML to import
-      }
+  <script type="module">
+import '@polymer/test-fixture/test-fixture.js';
+import '@polymer/polymer/polymer-legacy.js';
+import { importHref as importHref$0 } from '@polymer/polymer/lib/utils/import-href.js';
+describe('Late upgrade', () => {
+  let combobox;
 
-      beforeEach(() => combobox = fixture('combobox'));
+  if (!(window['Polymer'] && window['Polymer'].importHref)) {
+    return; // TODO: With Polymer 3 we don’t have the HTML to import
+  }
 
-      it('should have preset value from property', done => {
-        // Set the value before the element is upgraded.
-        combobox.items = ['foo', 'bar'];
-        combobox.value = 'bar';
+  beforeEach(() => combobox = fixture('combobox'));
 
-        expect(combobox.is).to.be.undefined;
+  it('should have preset value from property', done => {
+    // Set the value before the element is upgraded.
+    combobox.items = ['foo', 'bar'];
+    combobox.value = 'bar';
 
-        Polymer.importHref('../vaadin-combo-box.html', () => {
-          expect(combobox.value).to.equal('bar');
-          done();
-        });
-      });
+    expect(combobox.is).to.be.undefined;
+
+    importHref$0('../vaadin-combo-box.html', () => {
+      expect(combobox.value).to.equal('bar');
+      done();
     });
-  </script>
-
-</body>
-
-</html>
+  });
+});
+</script>

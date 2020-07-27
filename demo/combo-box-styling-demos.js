@@ -1,5 +1,8 @@
-<dom-module id="combo-box-styling-demos">
-  <template>
+import { html } from '@polymer/polymer/lib/utils/html-tag.js';
+import { PolymerElement } from '@polymer/polymer/polymer-element.js';
+class ComboBoxStylingDemos extends DemoReadyEventEmitter(ComboBoxDemo(PolymerElement)) {
+  static get template() {
+    return html`
     <style include="vaadin-component-demo-shared-styles">
       :host {
         display: block;
@@ -7,7 +10,7 @@
     </style>
     <h3>Custom input field style</h3>
     <vaadin-demo-snippet id="customizing-border-style" when-defined="vaadin-combo-box">
-      <template preserve-content>
+      <template preserve-content="">
         <dom-module id="custom-combo-box-border" theme-for="vaadin-text-field">
           <template>
             <style>
@@ -25,13 +28,13 @@
             comboBox.items = ['Option one', 'Option two'];
             comboBox.value = 'Option one';
           });
-        </script>
+        &lt;/script>
       </template>
     </vaadin-demo-snippet>
 
     <h3>Custom icon</h3>
     <vaadin-demo-snippet id="customizing-icon" when-defined="vaadin-combo-box">
-      <template preserve-content>
+      <template preserve-content="">
         <dom-module id="custom-combo-box-icon" theme-for="vaadin-combo-box">
           <template>
             <style>
@@ -48,13 +51,13 @@
             comboBox.items = ['Option one', 'Option two'];
             comboBox.value = 'Option one';
           });
-        </script>
+        &lt;/script>
       </template>
     </vaadin-demo-snippet>
 
     <h3>Custom overlay width</h3>
     <vaadin-demo-snippet id="overlay-width" when-defined="vaadin-combo-box">
-      <template preserve-content>
+      <template preserve-content="">
         <vaadin-combo-box label="Narrow overlay"></vaadin-combo-box>
         <vaadin-combo-box label="Wide overlay"></vaadin-combo-box>
         <script>
@@ -75,13 +78,13 @@
               });
             });
           });
-        </script>
+        &lt;/script>
       </template>
     </vaadin-demo-snippet>
 
     <h3>Custom overlay style</h3>
     <vaadin-demo-snippet id="customizing-theme-variant" when-defined="vaadin-combo-box">
-      <template preserve-content>
+      <template preserve-content="">
         <dom-module id="custom-text-field-and-item" theme-for="vaadin-combo-box-item">
           <template>
             <style>
@@ -105,17 +108,14 @@
           window.addDemoReadyListener('#customizing-theme-variant', function(document) {
             document.querySelector('vaadin-combo-box').items = elements;
           });
-        </script>
+        &lt;/script>
       </template>
     </vaadin-demo-snippet>
+`;
+  }
 
-  </template>
-  <script>
-    class ComboBoxStylingDemos extends DemoReadyEventEmitter(ComboBoxDemo(Polymer.Element)) {
-      static get is() {
-        return 'combo-box-styling-demos';
-      }
-    }
-    customElements.define(ComboBoxStylingDemos.is, ComboBoxStylingDemos);
-  </script>
-</dom-module>
+  static get is() {
+    return 'combo-box-styling-demos';
+  }
+}
+customElements.define(ComboBoxStylingDemos.is, ComboBoxStylingDemos);

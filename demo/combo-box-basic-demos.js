@@ -1,5 +1,8 @@
-<dom-module id="combo-box-basic-demos">
-  <template>
+import { html } from '@polymer/polymer/lib/utils/html-tag.js';
+import { PolymerElement } from '@polymer/polymer/polymer-element.js';
+class ComboBoxBasicDemos extends DemoReadyEventEmitter(ComboBoxDemo(PolymerElement)) {
+  static get template() {
+    return html`
     <style include="vaadin-component-demo-shared-styles">
       :host {
         display: block;
@@ -8,7 +11,7 @@
 
     <h3>Basic usage</h3>
     <vaadin-demo-snippet id="basic-usage" when-defined="vaadin-combo-box">
-      <template preserve-content>
+      <template preserve-content="">
         <vaadin-combo-box label="Label"></vaadin-combo-box>
         <vaadin-combo-box placeholder="Placeholder"></vaadin-combo-box>
         <vaadin-combo-box value="Value"></vaadin-combo-box>
@@ -19,15 +22,15 @@
             comboBox[1].items = ['Option one', 'Option two'];
             comboBox[2].items = ['Value', 'Option one', 'Option two'];
           });
-        </script>
+        &lt;/script>
       </template>
     </vaadin-demo-snippet>
 
     <h3>Disabled and read-only</h3>
     <vaadin-demo-snippet id="disabled-and-readonly" when-defined="vaadin-combo-box">
-      <template preserve-content>
-        <vaadin-combo-box label="Disabled" disabled></vaadin-combo-box>
-        <vaadin-combo-box label="Read-only" readonly></vaadin-combo-box>
+      <template preserve-content="">
+        <vaadin-combo-box label="Disabled" disabled=""></vaadin-combo-box>
+        <vaadin-combo-box label="Read-only" readonly=""></vaadin-combo-box>
         <script>
           window.addDemoReadyListener('#disabled-and-readonly', function(document) {
             const combos = document.querySelectorAll('vaadin-combo-box');
@@ -36,13 +39,13 @@
               comboBox.value = 'Value';
             });
           });
-        </script>
+        &lt;/script>
       </template>
     </vaadin-demo-snippet>
 
     <h3>Object list</h3>
     <vaadin-demo-snippet id="object-list" when-defined="vaadin-combo-box">
-      <template preserve-content>
+      <template preserve-content="">
         <vaadin-combo-box label="Department"></vaadin-combo-box>
         <script>
           window.addDemoReadyListener('#object-list', function(document) {
@@ -60,27 +63,27 @@
               combo.value = '1';
             });
           });
-        </script>
+        &lt;/script>
       </template>
     </vaadin-demo-snippet>
 
     <h3>Clear button</h3>
     <vaadin-demo-snippet id="clear-button" when-defined="vaadin-combo-box">
-      <template preserve-content>
-        <vaadin-combo-box label="Label" clear-button-visible></vaadin-combo-box>
+      <template preserve-content="">
+        <vaadin-combo-box label="Label" clear-button-visible=""></vaadin-combo-box>
         <script>
           window.addDemoReadyListener('#clear-button', function(document) {
             const comboBox = document.querySelector('vaadin-combo-box');
             comboBox.items = ['Option one', 'Option two'];
             comboBox.value = 'Option one';
           });
-        </script>
+        &lt;/script>
       </template>
     </vaadin-demo-snippet>
 
     <h3>Value change event</h3>
     <vaadin-demo-snippet id="value-change-event" when-defined="vaadin-combo-box">
-      <template preserve-content>
+      <template preserve-content="">
         <vaadin-combo-box label="Label"></vaadin-combo-box>
         <div id="output">Selected value:</div>
         <script>
@@ -92,15 +95,15 @@
               output.textContent = event.target.value;
             });
           });
-        </script>
+        &lt;/script>
       </template>
     </vaadin-demo-snippet>
 
     <h3>Allow custom values</h3>
     <p>Allow the user to set any value for the field in addition to selecting a value from the dropdown menu.</p>
     <vaadin-demo-snippet id="allow-custom-values" when-defined="vaadin-combo-box">
-      <template preserve-content>
-        <vaadin-combo-box label="Fruit" allow-custom-value></vaadin-combo-box>
+      <template preserve-content="">
+        <vaadin-combo-box label="Fruit" allow-custom-value=""></vaadin-combo-box>
         <p>Selected value: <span></span></p>
         <script>
           window.addDemoReadyListener('#allow-custom-values', function(document) {
@@ -114,15 +117,15 @@
               span.textContent = event.target.value;
             });
           });
-        </script>
+        &lt;/script>
       </template>
     </vaadin-demo-snippet>
 
     <h3>Auto open disabled</h3>
     <p>Dropdown is only opened when clicking the toggle button or pressing Up or Down arrow keys.</p>
     <vaadin-demo-snippet id="auto-open-disabled" when-defined="vaadin-combo-box">
-      <template preserve-content>
-        <vaadin-combo-box label="Label" auto-open-disabled></vaadin-combo-box>
+      <template preserve-content="">
+        <vaadin-combo-box label="Label" auto-open-disabled=""></vaadin-combo-box>
         <script>
           window.addDemoReadyListener('#auto-open-disabled', function(document) {
             const combos = document.querySelectorAll('vaadin-combo-box');
@@ -131,14 +134,14 @@
               comboBox.value = 'Value';
             });
           });
-        </script>
+        &lt;/script>
       </template>
     </vaadin-demo-snippet>
 
     <h3>Storing custom values</h3>
     <vaadin-demo-snippet id="storing-custom-value" when-defined="vaadin-combo-box">
-      <template preserve-content>
-        <vaadin-combo-box label="Project" allow-custom-value></vaadin-combo-box>
+      <template preserve-content="">
+        <vaadin-combo-box label="Project" allow-custom-value=""></vaadin-combo-box>
         <p>Selected id: <span></span></p>
         <script>
           window.addDemoReadyListener('#storing-custom-value', function(document) {
@@ -167,7 +170,7 @@
               comboBox.selectedItem = projects[0];
             });
           });
-        </script>
+        &lt;/script>
       </template>
     </vaadin-demo-snippet>
 
@@ -180,7 +183,7 @@
       <b>Note:</b> the total number of items must be provided as the second argument of the data provider <code>callback</code>.
     </p>
     <vaadin-demo-snippet id="lazy-loading" when-defined="vaadin-combo-box">
-      <template preserve-content>
+      <template preserve-content="">
         <vaadin-combo-box label="Country"></vaadin-combo-box>
         <script>
           window.addDemoReadyListener('#lazy-loading', function(document) {
@@ -202,36 +205,30 @@
               xhr.send();
             };
           });
-        </script>
+        &lt;/script>
       </template>
     </vaadin-demo-snippet>
-
-  </template>
-  <script>
-    class ComboBoxBasicDemos extends DemoReadyEventEmitter(ComboBoxDemo(Polymer.Element)) {
-      static get is() {
-        return 'combo-box-basic-demos';
-      }
-    }
-    customElements.define(ComboBoxBasicDemos.is, ComboBoxBasicDemos);
-  </script>
-</dom-module>
-
-<script>
-  const projects = [
-    {id: '1', name: 'Apollo'},
-    {id: '2', name: 'Aquarius'},
-    {id: '3', name: 'Polar'}
-  ];
-
-  function fetchProjects(callback) {
-    callback(projects.slice(0));
+`;
   }
 
-  function insertProject(name, callback) {
-    const id = String(projects.length + 1);
-    const project = {id: id, name: name};
-    projects.push(project);
-    callback(project, projects.slice(0));
+  static get is() {
+    return 'combo-box-basic-demos';
   }
-  </script>
+}
+customElements.define(ComboBoxBasicDemos.is, ComboBoxBasicDemos);
+const projects = [
+  {id: '1', name: 'Apollo'},
+  {id: '2', name: 'Aquarius'},
+  {id: '3', name: 'Polar'}
+];
+
+function fetchProjects(callback) {
+  callback(projects.slice(0));
+}
+
+function insertProject(name, callback) {
+  const id = String(projects.length + 1);
+  const project = {id: id, name: name};
+  projects.push(project);
+  callback(project, projects.slice(0));
+}

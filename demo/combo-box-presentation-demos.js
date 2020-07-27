@@ -1,5 +1,8 @@
-<dom-module id="combo-box-presentation-demos">
-  <template>
+import { html } from '@polymer/polymer/lib/utils/html-tag.js';
+import { PolymerElement } from '@polymer/polymer/polymer-element.js';
+class ComboBoxPresentationDemos extends DemoReadyEventEmitter(ComboBoxDemo(PolymerElement)) {
+  static get template() {
+    return html`
     <style include="vaadin-component-demo-shared-styles">
       :host {
         display: block;
@@ -7,7 +10,7 @@
     </style>
     <h3>Customizing drop down item with item renderer</h3>
     <vaadin-demo-snippet id="customizing-with-item-renderer" when-defined="vaadin-combo-box">
-      <template preserve-content>
+      <template preserve-content="">
         <vaadin-combo-box label="Users" item-label-path="name"></vaadin-combo-box>
         <script>
           window.addDemoReadyListener('#customizing-with-item-renderer', function(document) {
@@ -28,7 +31,7 @@
               root.querySelector('.name').textContent = model.item.name;
             };
           });
-        </script>
+        &lt;/script>
       </template>
     </vaadin-demo-snippet>
 
@@ -38,9 +41,8 @@
       removed in near future.
     </p>
     <vaadin-demo-snippet id="customizing-with-item-template" when-defined="vaadin-combo-box">
-      <template preserve-content>
-        <vaadin-combo-box label="Element" item-label-path="name" item-value-path="symbol"
-        style="width: 240px;">
+      <template preserve-content="">
+        <vaadin-combo-box label="Element" item-label-path="name" item-value-path="symbol" style="width: 240px;">
           <template>
             <b>[[item.name]], <sub>[[item.number]]</sub>[[item.symbol]]</b><br>
             array index: [[index]]
@@ -50,17 +52,14 @@
           window.addDemoReadyListener('#customizing-with-item-template', function(document) {
             document.querySelector('vaadin-combo-box').items = elementsJson;
           });
-        </script>
+        &lt;/script>
       </template>
     </vaadin-demo-snippet>
+`;
+  }
 
-  </template>
-  <script>
-    class ComboBoxPresentationDemos extends DemoReadyEventEmitter(ComboBoxDemo(Polymer.Element)) {
-      static get is() {
-        return 'combo-box-presentation-demos';
-      }
-    }
-    customElements.define(ComboBoxPresentationDemos.is, ComboBoxPresentationDemos);
-  </script>
-</dom-module>
+  static get is() {
+    return 'combo-box-presentation-demos';
+  }
+}
+customElements.define(ComboBoxPresentationDemos.is, ComboBoxPresentationDemos);
