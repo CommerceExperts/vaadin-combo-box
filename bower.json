@@ -2,7 +2,9 @@
   "name": "vaadin-combo-box",
   "homepage": "https://vaadin.com/components",
   "description": "Web Component for displaying a list of items with filtering",
-  "authors": ["Vaadin Ltd"],
+  "authors": [
+    "Vaadin Ltd"
+  ],
   "keywords": [
     "web-components",
     "web-component",
@@ -14,7 +16,13 @@
     "vaadin-combo-box.html",
     "vaadin-combo-box-light.html",
     "theme/material/vaadin-combo-box.html",
-    "theme/material/vaadin-combo-box-light.html"
+    "theme/material/vaadin-combo-box-light.html",
+    "demo/combo-box-basic-demos.html",
+    "demo/combo-box-validation-demos.html",
+    "demo/combo-box-filtering-demos.html",
+    "demo/combo-box-presentation-demos.html",
+    "demo/combo-box-theme-variants-demos.html",
+    "demo/combo-box-styling-demos.html"
   ],
   "repository": {
     "type": "git",
@@ -33,7 +41,7 @@
     "iron-a11y-announcer": "^2.0.0",
     "iron-list": "^2.0.2",
     "iron-resizable-behavior": "^2.0.0",
-    "polymer": "^2.0.0",
+    "polymer": "Polymer/polymer#5f5d2c2",
     "vaadin-control-state-mixin": "vaadin/vaadin-control-state-mixin#^2.1.1",
     "vaadin-overlay": "vaadin/vaadin-overlay#^3.4.0",
     "vaadin-text-field": "vaadin/vaadin-text-field#^2.6.0",
@@ -54,6 +62,7 @@
     "vaadin-dialog": "^2.2.1"
   },
   "resolutions": {
-    "vaadin-element-mixin": "^2.0.0"
+    "vaadin-element-mixin": "^2.0.0",
+    "polymer": "5f5d2c2"
   }
 }

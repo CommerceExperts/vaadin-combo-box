@@ -4,7 +4,7 @@
     {
       "name": "Basics",
       "url": "combo-box-basic-demos",
-      "src": "combo-box-basic-demos.html",
+      "src": "combo-box-basic-demos.js",
       "meta": {
         "title": "Vaadin Combo Box Basic Examples",
         "description": "",
@@ -14,7 +14,7 @@
     {
       "name": "Validation",
       "url": "combo-box-validation-demos",
-      "src": "combo-box-validation-demos.html",
+      "src": "combo-box-validation-demos.js",
       "meta": {
         "title": "Vaadin Combo Validation Examples",
         "description": "",
@@ -24,7 +24,7 @@
     {
       "name": "Filtering",
       "url": "combo-box-filtering-demos",
-      "src": "combo-box-filtering-demos.html",
+      "src": "combo-box-filtering-demos.js",
       "meta": {
         "title": "Vaadin Combo Box Filtering Examples",
         "description": "",
@@ -34,7 +34,7 @@
     {
       "name": "Presentation",
       "url": "combo-box-presentation-demos",
-      "src": "combo-box-presentation-demos.html",
+      "src": "combo-box-presentation-demos.js",
       "meta": {
         "title": "Vaadin Combo Box presentation Examples",
         "description": "",
@@ -44,7 +44,7 @@
     {
       "name": "Theme Variants",
       "url": "combo-box-theme-variants-demos",
-      "src": "combo-box-theme-variants-demos.html",
+      "src": "combo-box-theme-variants-demos.js",
       "meta": {
         "title": "Theme Variants Examples",
         "description": "",
@@ -54,7 +54,7 @@
     {
       "name": "Styling",
       "url": "combo-box-styling-demos",
-      "src": "combo-box-styling-demos.html",
+      "src": "combo-box-styling-demos.js",
       "meta": {
         "title": "Vaadin Combo Box Styling Examples",
         "description": "",
