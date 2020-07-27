@@ -504,6 +504,7 @@ This program is available under Apache License Version 2.0, available at https:/
       // should close on enter when custom values are allowed, input field is cleared, or when an existing
       // item is focused with keyboard. If auto open is disabled, under the same conditions, commit value.
       if ((this.opened || this.autoOpenDisabled) && (this.allowCustomValue || this._inputElementValue === '' || this._focusedIndex > -1)) {
+        this.__itemClickedOrEnterWhilstFocused = true;
         this._closeOrCommit();
 
         // Do not submit the surrounding form.
@@ -602,7 +603,9 @@ This program is available under Apache License Version 2.0, available at https:/
     }
 
     _commitValue() {
-      if (this.$.overlay._items && this._focusedIndex > -1) {
+      // Fix for https://github.com/vaadin/vaadin-combo-box/issues/819
+      if (this.$.overlay._items && this._focusedIndex > -1 && this.__itemClickedOrEnterWhilstFocused) {
+        delete this.__itemClickedOrEnterWhilstFocused;
         const focusedItem = this.$.overlay._items[this._focusedIndex];
         if (this.selectedItem !== focusedItem) {
           this.selectedItem = focusedItem;
@@ -928,6 +931,7 @@ This program is available under Apache License Version 2.0, available at https:/
 
       if (this.opened) {
         this._focusedIndex = this.filteredItems.indexOf(e.detail.item);
+        this.__itemClickedOrEnterWhilstFocused = true;
         this.close();
       } else if (this.selectedItem !== e.detail.item) {
         this.selectedItem = e.detail.item;
